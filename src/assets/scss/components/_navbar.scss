@@ -1,0 +1,214 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-bg-color);
+    color:var(--main-color);
+    position:fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 101;
+    box-shadow:rgba(0, 0, 0, 0.12) 0px 1px 4px 1px;
+}
+.navbar__nav{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    svg{
+       margin-left: 20px;
+       font-size: 1.4rem; 
+    }
+}
+.navbar__nav-link{
+    float: left;
+    text-align: center;
+    padding: 21px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    color:var(--second-color);
+    position: relative;
+    &:hover{
+        cursor: pointer;
+    }
+
+}
+
+.navbar__nav-right{
+    margin-left: auto;
+    svg::selection{
+        background: none;
+    }
+}
+.navbar__search{
+    position: relative;
+    margin: auto;
+    width: 50%;
+    input{
+        background: var(--second-bg-color);
+        border: none;
+        padding: 12px 50px 12px 50px;
+        width: 100%;
+        outline: none;
+        color:var(--main-color);
+        border-radius: 20px;
+    }
+    svg{
+        position: absolute;
+        top: 30%;
+        right: 15px;
+        transform: translate(-50%);
+        color:var(--main-color);
+        cursor: pointer;
+    }
+}
+
+.navbar__logo{
+    width: 140px;
+    height: 65x;
+    padding: 10px 10px 10px 50px;
+  
+    &::selection{
+        background: none;
+    }
+}
+.navbar__avatar{
+    padding: 11px;
+    img{
+        width: 39px;
+        height: 39px;
+        border-radius: 50%;
+    }
+}
+.navbar__badge{
+    font-size: .6rem;
+    padding: 2px 4px;
+    position: absolute;
+    right: 5px;
+    top: 9px;
+    color:#fff;
+    background: var(--danger-color);
+    border-radius: 5px;
+    &::selection{
+        background: none;
+    }
+    
+
+}
+.navbar__dropdown{
+    position: relative;
+    &:hover{
+        cursor: pointer;
+    }
+
+}
+.navbar__dropdown-menu{
+    list-style: none;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    position: absolute;
+    right: 20%;
+    top: 90%;
+    background:var(--main-bg-color);
+    max-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: unset;
+    border-radius: 10px;
+    border: 0.125px solid var(--second-bg-color);
+}
+
+.navbar__dropdown-expand{
+    visibility: visible;
+
+}
+.navbar__notification-menu{
+    min-width: 380px;
+}
+
+.navbar__dropdown-menu-header{
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--second-bg-color);
+}
+
+.navbar__dropdown-menu-content{
+    max-height: 500px;
+    overflow-y: auto;
+}
+.navbar__dropdown-menu-item{
+    width: 100%;
+}
+.navbar__dropdown-menu-link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: var(--main-color);
+    &:hover{
+        cursor: pointer;
+        background: var(--second-bg-color);
+    }
+    div{
+        min-width: 82px;
+        height: 50px;
+        position: relative;
+    }
+    svg{
+        font-size: 1.25rem;
+        color:var(--second-color);
+        position: absolute;
+        left:50%;
+        top:10%;
+        transform: translate(-50%,50%);
+    }
+    span{
+        font-size: 15px;
+        width: 298px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        span{
+            font-size: 13px;
+        }
+    }
+}
+.navbar__dropdown-menu-footer{
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid var(--second-bg-color);
+}
+
+.navbar__scrollbar-hover::-webkit-scrollbar {
+	display: none;
+}
+
+.navbar__scrollbar-hover:hover::-webkit-scrollbar {
+	display: block;
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar__nav-right  {
+  
+       
+        .navbar__notification-menu{
+            min-width: 280px;
+        }
+    }
+	.navbar__nav-right .mode, .navbar__nav-right .navbar__avt-wrapper {
+		// display: list-item;
+	}
+	.navbar__search {
+		display: none;
+	}
+	.navbar__dropdown-menu {
+		max-width: 300px;
+	}
+
+    
+}

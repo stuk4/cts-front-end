@@ -1,0 +1,40 @@
+// DEFINICION DE VARIABLES GENERALES
+
+
+
+
+
+
+
+
+:root{
+    --primary-color:#4834d4;
+    --secondary-color: #6ab04c;
+    --waring-color:#f0932b;
+    --danger-color:#eb4d4b;
+
+    --light-color: #212529;
+    --light-second-color:#727475;
+    --light-background:#ffffff;
+    --light-second-background:#f1f1f1;
+
+    --dark-color: #909090;
+    --dark-second-color:#f5f6fa;
+    --dark-background:#23242D;
+    --dark-second-background:#181818;
+    --apiux-color:#FFCC00;
+
+
+}
+.light{
+    --main-bg-color: var(--light-background);
+    --second-bg-color:var(--light-second-background);
+    --main-color: var(--light-color);
+    --second-color:var(--light-second-color);
+}
+.dark{
+    --main-bg-color: var(--dark-background);
+    --second-bg-color:var(--dark-second-background);
+    --main-color: var(--dark-color);
+    --second-color:var(--dark-second-color);
+}

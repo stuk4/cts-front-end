@@ -1,0 +1,110 @@
+.card{
+    background: var(--main-bg-color);
+    color: var(--main-color);
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+    button{
+        background:var(--apiux-color) ;
+        color:var(--light-color);
+        &:hover{
+            background:var(--secondary-color);
+        }
+    }
+}
+.job__card-container{
+    flex-grow: 1;
+}
+.job__card-item{
+    padding: 30px 10px 30px 20px;
+    padding-left: 20px;
+}
+.job__card-title{
+    margin-bottom: 5px;
+}
+.job__card-subtitle{
+    color:var(--light-second-color)
+}
+.job__form-container{
+    background: var(--main-bg-color);
+    color:var(--main-color);
+    button{
+        background:var(--apiux-color) ;
+        color:var(--light-color);
+        margin: 10px;
+        &:hover{
+            background:var(--secondary-color);
+        }
+    }
+}
+.job__stepper{
+    background: var(--main-bg-color) !important;
+    width: 80%;
+    .MuiStepLabel-label{
+        color:var(--main-color) !important;
+    }
+    @media screen and (max-width:450px) {
+        width: 100%;
+    }
+   
+}
+// SECCION OVERRIDE MUI
+.MuiInputLabel-root{
+    color:var(--main-color) !important;
+}
+.MuiInputBase-input{
+    color:var(--main-color) !important;
+}
+.MuiFormControl-root{
+    label{
+
+        color:var(--main-color);
+    }
+    .Mui-focused{
+       color: var(--main-color) !important;
+   }
+}
+.MuiStepLabel-iconContainer{
+    svg{
+        color:var(--apiux-color) !important;
+    }
+}
+.MuiFormControl-root{
+    fieldset{
+        color:var(--main-color);
+    }
+    legend{
+        color:var(--main-color);
+    }
+}
+.MuiOutlinedInput-root{
+    fieldset{
+        border-color: var(--main-color) !important;
+    }
+    &:hover fieldset{
+        border-color:var(--secondary-color) !important;
+    }
+   
+}
+.Mui-focused fieldset{
+    
+    border-color: var(--apiux-color)  !important;
+}
+.MuiSelect-root{
+    color:var(---main-color) !important;
+    option{
+        color:var(---main-color) !important;
+        background-color: var(--second-bg-color) !important;
+     
+    }
+    select{
+        color:var(---main-color) !important;
+     
+    }
+ 
+}
+
+// FIN SECCION OVERRIDE MUI
+.job__input-container{
+    padding: 10px;
+}

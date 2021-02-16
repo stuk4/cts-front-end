@@ -1,0 +1,21 @@
+
+.wrapper{
+    padding: 10px;
+    overflow-x: hidden;
+    margin-left: 82px;
+    padding-top: 80px;
+    height: 100vh;
+    background: var(--second-bg-color);
+    transition: margin-left .5s;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .wrapper {
+        margin-left: 0;
+    }
+    .sidebar__expand .wrapper {
+        margin-left: 0;
+    }
+
+}
