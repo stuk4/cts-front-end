@@ -35,7 +35,18 @@ body{
 	background: transparent;
 }
 // Fin scroll
-
+.base__scroll{
+	&::-webkit-scrollbar{
+		width: 9px;
+		height: 9px;
+		background-color: var(--second-bg-color);
+	  }
+	  &::-webkit-scrollbar-thumb{
+		background-color: var(--main-color);
+		border-radius: 10rem;
+		border: 1px solid var(--main-bg-color);
+	  }
+}
 
 // Grid
 .row{

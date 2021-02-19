@@ -1,0 +1,125 @@
+// SECCION Sobrescribir modal
+.ReactModal__Html--open,
+.ReactModal__Body--open {
+  overflow: hidden; /* prevents background page from scrolling when the modal is open */
+}
+
+.ReactModal__Overlay {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.ReactModal__Content {
+  // background: white;
+  border-radius: 10px;
+  border: none;
+  max-width: calc(90vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  position: relative;
+  &:focus{
+    outline: none;
+  }
+}
+// Fin Sobreescribir modal
+.modal-close-btn {
+  cursor: pointer;
+  top: 1.5rem;
+  right: 1.5rem;
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+}
+
+
+
+
+
+.modal__container{
+    padding:20px;
+    
+    background: var(--main-bg-color);
+    color: var(--main-color);
+    p{
+      white-space: pre-wrap;
+    }
+    #modal__edit{
+        background:var(--primary-color) ;
+        color:whitesmoke;
+        
+        &:hover{
+            background: darken(#4834d4, 10%);
+        }
+    }
+    #modal__delete{
+        background:var(--danger-color) ;
+        color:whitesmoke;
+        &:hover{
+            background: darken(#eb4d4b, 10%);
+        }
+    }
+}
+.modal__titles{
+  margin: 20px 0px 20px 0px;
+  
+}
+
+.modal__select{
+  background: transparent;
+  color: var(--main-color) ; 
+  display: flex;
+  flex-direction: row !important;
+  outline: none;
+  border: none;
+  justify-content: center;
+  border-radius:5px;
+  padding:0;
+  margin:0;
+  appearance: none;
+  cursor: inherit;
+  line-height: inherit;
+
+  &:disabled{
+    opacity: 1 !important;
+  }
+ 
+  option{
+ 
+    color:var(--main-color);
+    background-color: var(--second-bg-color) !important;
+  
+  }
+
+  &::-webkit-scrollbar{
+    width: 9px;
+    height: 9px;
+    background-color:var(--second-bg-color) ;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: var(--main-color);
+    border-radius: 10rem;
+    // border: 1px solid var(--main-bg-color);
+  }
+
+}
+
+.MuiAccordion-root:before {
+  background-color: var(--main-color) !important;
+}
+.modal__accordion{
+  background: var(--main-color) !important;
+  &::before{
+    background: var(--main-color) !important;
+  }
+}

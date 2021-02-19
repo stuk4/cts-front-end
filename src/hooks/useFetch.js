@@ -20,11 +20,11 @@ const useFetch = (url,data,method='GET')=>{
                 {
                     method,
                     headers:{
-                        'Content-type':'application/json'
+                        'Content-Type':'application/json',
                     },
                     body:JSON.stringify(data)
                 }
-               );
+               )
             
         }
 

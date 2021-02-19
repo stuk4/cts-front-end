@@ -5,7 +5,7 @@ import { activeJob } from '../../actions/jobs';
 import { useForm } from '../../hooks/useForm';
 
 
-export const JobPrincipalInfo = () => {
+export const JobPrincipalInfo = ({inputsDisabled=false}) => {
     const dispatch = useDispatch();
     const {active:job} = useSelector( state => state.jobs );
     const initialState = ()=>{
@@ -13,9 +13,10 @@ export const JobPrincipalInfo = () => {
             return job
         }
         return {
+            id:null,
             title:'',
             department:'',
-            employment_type:'',
+            employment_type:'EMPLOYMENT_TYPE_UNSPECIFIED',
             direction1:'',
             direction2:'',
             description:'',
@@ -24,14 +25,23 @@ export const JobPrincipalInfo = () => {
             url_contact1:'',
             url_contact2:'',
             instruction:'',
-            type_compensation:'',
-            unit_compensation:'',
+            posting_expire:'',
+            type_compensation:'COMPENSATION_TYPE_UNSPECIFIED',
+            unit_compensation:'COMPENSATION_UNIT_UNSPECIFIED',
             max_range_amount:0,
             min_range_amount:0,
+            degree_type:'DEGREE_TYPE_UNSPECIFIED',
+            job_level:'JOB_LEVEL_UNSPECIFIED',
+            qualifications:'',
+            promotion_value:0,
+            job_benefit:[],
+            posting_region:'POSTING_REGION_UNSPECIFIED',
+            incentives:'',
+            responsabilities:''
             
         }
     }
-    const [formValues,handleInputChange] = useForm(initialState)
+    const [formValues,handleInputChange,reset] = useForm(initialState)
     const {
         title,
         department,
@@ -44,33 +54,45 @@ export const JobPrincipalInfo = () => {
         url_contact1,
         url_contact2,
         instruction,
+        posting_expire,
         type_compensation,
         unit_compensation,
         max_range_amount,
         min_range_amount,
+        
     } = formValues
 
     // TODO agregar informacion de compensacion
-
+    useEffect(() => {
+        if(job===null){
+            reset()   
+        }
+    }, [job,reset])
     
     useEffect(() => {
-       dispatch(activeJob({...formValues}))
+      
+        dispatch(activeJob({...formValues}))
+        
+       
        
     }, [formValues,dispatch])
     return (
-       <Grid container   justify="center" alignItems="center"  >
+       <Grid container   justify="flex-start" alignItems="center"  >
            <Grid item   xs={12}>
                <h2 style={{marginLeft:"20px"}}>Información principal</h2>
                <Divider variant="inset" style={{marginBottom:"20px"}} component="h2" />
             </Grid>
            <Grid 
+                
                 item 
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField 
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     required
                     value={title}
@@ -86,13 +108,15 @@ export const JobPrincipalInfo = () => {
                 container
                 justify="center" alignItems="center"   
                 className="job__input-container"
-                xs={12} sm={2}>
-                <TextField 
+                md={12} lg={6}>
+                <TextField
+                    disabled={inputsDisabled} 
+                    fullWidth
                     onChange={handleInputChange}
                     value={department}
                     required
                     name="department"
-                    label="Departmaento"
+                    label="Departamento"
                     autoComplete="off"
                     variant="outlined"
                         
@@ -103,29 +127,29 @@ export const JobPrincipalInfo = () => {
                 container
                 justify="center" alignItems="center"   
                 className="job__input-container"
-                xs={12} sm={3}>
-                <FormControl variant="outlined" >
+                md={12} lg={6}>
+            <FormControl disabled={inputsDisabled} fullWidth variant="outlined" >
                     
-                <InputLabel htmlFor="employment_type">Tipo</InputLabel>
+                <InputLabel htmlFor="employment_type">Tipo empleo</InputLabel>
                 <Select
                     native
                     onChange={handleInputChange}
                     value={employment_type}
                     className="text-main"
-                    label="Tipo"
+                    label="Tipo empleo"
                     inputProps={{
                         name: 'employment_type',
                         id: 'employment_type',
                     }}
                 >
               
-                <option defaultChecked value="EMPLOYMENT_TYPE_UNSPECIFIED">No esepcificado</option>
+                <option defaultChecked value="EMPLOYMENT_TYPE_UNSPECIFIED">No especificado</option>
                 <option value="FULL_TIME">Tiempo completo</option>
                 <option value="PART_TIME">Part-time</option>
                 <option value="CONTRACTOR">Contratista</option>
-                <option value="CONTRACT_TO_HIRE">Segun desempeño</option>
+                <option value="CONTRACT_TO_HIRE">Según desempeño</option>
                 <option value="TEMPORARY">Temporal</option>
-                <option value="INTERN">Practica</option>
+                <option value="INTERN">Práctica</option>
                 <option value="VOLUNTEER">Voluntario</option>
                 <option value="PER_DIEM">Flexible</option>
                 <option value="FLY_IN_FLY_OUT">Viajero</option>
@@ -144,16 +168,18 @@ export const JobPrincipalInfo = () => {
                 alignContent="center"
                 alignItems="center"   
                 className="job__input-container"
-                xs={12} 
-                sm={6}
-                md={2}
+                md={12} 
+                lg={6}
+             
                 >
                   <TextField
+                    fullWidth
+                    disabled={inputsDisabled}
                     onChange={handleInputChange}
                     value={direction1} 
                     required
                     name="direction1"
-                    label="Direccion"
+                    label="Dirección"
                     autoComplete="off"
                     variant="outlined"
                     
@@ -166,19 +192,24 @@ export const JobPrincipalInfo = () => {
                 alignContent="center"
                 alignItems="center"   
                 className="job__input-container"
-                xs={12}
-                sm={6}
-                md={2}
+                md={12}
+                lg={7}
                  >
-                  <TextField
-                    onChange={handleInputChange}
-                    value={direction2} 
-                    name="direction2"
-                    label="Direccion opcional"
-                     autoComplete="off"
-                    variant="outlined"
-                    
-                />
+                  
+                <TextField 
+                        disabled={inputsDisabled}
+                        fullWidth
+                        required
+                        onChange={handleInputChange}
+                        value={description}
+                        name="description"
+                        multiline
+                        rows={4}
+                        label="Descripción"
+                        autoComplete="off"
+                        variant="outlined"
+                        />
+
            </Grid>
            <Grid 
                 item
@@ -186,25 +217,25 @@ export const JobPrincipalInfo = () => {
                 justify="center" 
                 alignContent="center"
                 alignItems="center"   
-                className="job__input-container"
-                xs={7} >
-                  
-                <TextField 
-                        onChange={handleInputChange}
-                        value={description}
-                        required
-                        name="description"
-                        multiline
-                        rows={4}
-                        fullWidth
-                        label="Descripción"
-                        autoComplete="off"
-                        variant="outlined"
-                        />
-
+                className="job__input-container-nexto"
+                md={12}
+                lg={4}
+                 >
+                  <TextField
+                    disabled={inputsDisabled}
+                    fullWidth
+                    onChange={handleInputChange}
+                    value={direction2} 
+                    name="direction2"
+                    label="Dirección opcional"
+                     autoComplete="off"
+                    variant="outlined"
+                    
+                />
            </Grid>
+           
             <Grid item   xs={12}>
-               <h2 style={{marginLeft:"20px"}}>Informacion para aplicar</h2>
+               <h2 style={{marginLeft:"20px"}}>Información para aplicar</h2>
                <Divider variant="inset" style={{marginBottom:"20px"}} component="h2" />
             </Grid>
             <Grid 
@@ -212,9 +243,11 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     value={email_contact1} 
                     required
@@ -232,9 +265,11 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     value={email_contact2} 
                     type="email"
@@ -251,9 +286,11 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     value={url_contact1}
                     type="url" 
@@ -270,9 +307,11 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     value={url_contact2} 
                     type="url"
@@ -291,23 +330,50 @@ export const JobPrincipalInfo = () => {
                 alignContent="center"
                 alignItems="center"   
                 className="job__input-container"
-                xs={7} >
+                md={7} >
                   
-                <TextField 
-                            onChange={handleInputChange}
-                            value={instruction}
-                            name="instruction"
-                            multiline
-                            rows={4}
-                            fullWidth
-                            label="Intrucciones"
-                            autoComplete="off"
-                            variant="outlined"
-                        />
+                <TextField
+                    disabled={inputsDisabled} 
+                    onChange={handleInputChange}
+                    value={instruction}
+                    name="instruction"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    label="Intrucciones"
+                    autoComplete="off"
+                    variant="outlined"
+                    />
 
            </Grid>
+           <Grid 
+                item
+                container
+                justify="center" 
+                alignContent="center"
+                alignItems="center"   
+                className="job__input-container-nexto"
+                md={12}
+                lg={4}
+                 >
+                  <TextField
+                    type="datetime-local"
+                    disabled={inputsDisabled}
+                    fullWidth
+                    onChange={handleInputChange}
+                    value={posting_expire} 
+                    name="posting_expire"
+                    label="Expiracion de empleo"
+                     autoComplete="off"
+                    variant="outlined"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    
+                />
+           </Grid>
              <Grid item   xs={12}>
-               <h2 style={{marginLeft:"20px"}}>Informacion de compensación</h2>
+               <h2 style={{marginLeft:"20px"}}>Información de compensación</h2>
                <Divider variant="inset" style={{marginBottom:"20px"}} component="h2" />
             </Grid>
             <Grid 
@@ -315,22 +381,24 @@ export const JobPrincipalInfo = () => {
                 container
                 justify="center" alignItems="center"   
                 className="job__input-container"
-                xs={12} sm={3}>
-                <FormControl variant="outlined" >
+                md={12} lg={6}
+                >
                     
-                <InputLabel htmlFor="type_compensation">Tipo compensasion</InputLabel>
+                <FormControl disabled={inputsDisabled} fullWidth variant="outlined" >
+                    
+                <InputLabel htmlFor="type_compensation">Tipo compensación</InputLabel>
                 <Select
                     native
                     onChange={handleInputChange}
                     value={type_compensation}
                     className="text-main"
-                    label="Tipo compensasion"
+                    label="Tipo compensación"
                     inputProps={{
                         name: 'type_compensation',
                         id: 'type_compensation',
                     }}
                 >
-                <option defaultChecked value="COMPENSATION_TYPE_UNSPECIFIED">No esepcificado</option>
+                <option defaultChecked value="COMPENSATION_TYPE_UNSPECIFIED">No especificado</option>
                 <option value="BASE">Base</option>
                 <option value="BONUS">Bonos</option>
                 <option value="SIGNING_BONUS">Bono por firma</option>
@@ -351,22 +419,23 @@ export const JobPrincipalInfo = () => {
                 container
                 justify="center" alignItems="center"   
                 className="job__input-container"
-                xs={12} sm={3}>
-                <FormControl variant="outlined" >
+                md={12} lg={6}
+                >
+                <FormControl disabled={inputsDisabled} fullWidth  variant="outlined" >
                     
-                <InputLabel htmlFor="unit_compensation">Unidad compensasion</InputLabel>
+                <InputLabel htmlFor="unit_compensation">Unidad compensación</InputLabel>
                 <Select
                     native
                     onChange={handleInputChange}
                     value={unit_compensation}
                     className="text-main"
-                    label="Unidad compensasion"
+                    label="Unidad compensación"
                     inputProps={{
                         name: 'unit_compensation',
                         id: 'unit_compensation',
                     }}
                 >
-                <option defaultChecked value="COMPENSATION_UNIT_UNSPECIFIED">No esepcificado</option>
+                <option defaultChecked value="COMPENSATION_UNIT_UNSPECIFIED">No especificado</option>
                 <option value="HOURLY">Cada hora</option>
                 <option value="DAILY">Diario</option>
                 <option value="WEEKLY">Semanal</option>
@@ -385,13 +454,15 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField 
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     type="number"
                     value={min_range_amount}
-                    label="Min comepnsasión"
+                    label="Min compensación"
                     name="min_range_amount"
                     autoComplete="off"
                     variant="outlined"
@@ -403,13 +474,15 @@ export const JobPrincipalInfo = () => {
                 container 
                 justify="center" alignItems="center"  
                 className="job__input-container"  
-                xs={12} sm={3}
+                md={12} lg={6}
                 >
                 <TextField 
+                    disabled={inputsDisabled}
+                    fullWidth
                     onChange={handleInputChange}
                     type="number"
                     value={max_range_amount}
-                    label="Max comepnsasión"
+                    label="Max compensación"
                     name="max_range_amount"
                     autoComplete="off"
                     variant="outlined"

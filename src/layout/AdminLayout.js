@@ -3,13 +3,16 @@ import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { NavBar } from '../components/admin/NavBar';
 import { SideBar } from '../components/admin/SideBar';
+import { JobModal } from '../components/jobs/JobModal';
 import routes from '../routers/routes'
 export const AdminLayout = () => {
-
+    const {active:job} = useSelector( state => state.jobs );
     const {visibilitySideBar} = useSelector( state => state.ui );
     const themeLocal = localStorage.getItem("theme") || "light"
 
     const getRoutesView = (routes) => {
+        
+      
         return routes.map((
             {component:Component,layout,path}
             ,key
@@ -37,7 +40,9 @@ export const AdminLayout = () => {
         <NavBar />
         <SideBar routes={routes} />
         {/* Wrapper */}
-        <div className="wrapper">
+        
+        
+        <div id="wrap" className="wrapper">
             <div className="row">
 
               <Switch>
@@ -47,6 +52,7 @@ export const AdminLayout = () => {
                 
             </div>
         </div>
+        {job && <JobModal job={job} />}
         {/* End Wrapper */}
 
 
