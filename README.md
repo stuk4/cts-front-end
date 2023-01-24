@@ -31,7 +31,7 @@ To run this project locally, clone the repository and install the dependencies:
 
 ```bash
 git clone https://github.com/stuk4/cts-front-end.git
-cd cts-jobs
+cd cts-front-end
 npm install
 ```
 Then, start the development server:
